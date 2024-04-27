@@ -1,0 +1,15 @@
+{
+  "extends": "@mf/tsconfig/base.json",
+  "compilerOptions": {
+    "paths": {
+      "core/*": [
+        "./*"
+      ]
+    }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.json",
+  ]
+}

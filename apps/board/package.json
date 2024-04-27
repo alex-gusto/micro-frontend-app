@@ -1,0 +1,24 @@
+{
+  "name": "@mf/board",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "webpack serve --port 9003",
+    "build": "webpack build --mode production",
+    "build:dev": "webpack build",
+    "test": "jest"
+  },
+  "types": "./src/exports.ts",
+  "exports": {
+    ".": "./src/exports.ts"
+  },
+  "dependencies": {
+    "@mf/core": "*",
+    "@mf/shell": "*",
+    "@mf/mf1": "*",
+    "@mf/mf2": "*"
+  },
+  "devDependencies": {
+    "@mf/tsconfig": "*",
+    "@mf/webpack": "*"
+  }
+}

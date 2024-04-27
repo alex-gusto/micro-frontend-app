@@ -1,0 +1,7 @@
+{
+  "name": "@mf/tsconfig",
+  "version": "1.0.0",
+  "dependencies": {
+    "@tsconfig/create-react-app": "^1.0.2"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "@mf/libs",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "webpack serve --port 9101",
+    "build": "webpack build --mode production",
+    "build:dev": "webpack build"
+  },
+  "main": "index.ts",
+  "types": "index.ts",
+  "devDependencies": {
+    "@mf/webpack": "*",
+    "@mf/tsconfig": "*"
+  }
+}

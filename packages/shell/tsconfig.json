@@ -1,0 +1,11 @@
+{
+  "extends": "@mf/tsconfig/base.json",
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "rootDir": "./src"
+  },
+  "include": [
+    "src/**/*",
+    "src/**/*.json",
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "@mf/core",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "webpack serve --port 9100",
+    "build": "webpack build --mode production",
+    "build:dev": "webpack build",
+    "test": "jest"
+  },
+  "main": "index.ts",
+  "types": "index.ts",
+  "exports": {
+    ".": "./index.ts",
+    "./styles": "./styles.css"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@mf/tsconfig": "*",
+    "@mf/webpack": "*"
+  }
+}

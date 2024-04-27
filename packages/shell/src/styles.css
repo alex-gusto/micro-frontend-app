@@ -1,0 +1,10 @@
+[id^='single-spa-application'] {
+  visibility: hidden;
+}
+
+[id^='single-spa-application'].active {
+  height: 100vh;
+  visibility: visible;
+  position: relative;
+  z-index: 1;
+}

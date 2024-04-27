@@ -1,0 +1,22 @@
+{
+  "name": "@mf/shell",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "webpack serve --port 9000",
+    "build": "webpack build --mode production",
+    "build:dev": "webpack build"
+  },
+  "main": "./src/exports.ts",
+  "types": "./src/exports.ts",
+  "exports": {
+    ".": "./src/exports.ts"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@mf/webpack": "*",
+    "@mf/tsconfig": "*"
+  },
+  "peerDependencies": {
+    "single-spa": "^5.9.5"
+  }
+}

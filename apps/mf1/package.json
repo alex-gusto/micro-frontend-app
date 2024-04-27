@@ -1,0 +1,19 @@
+{
+  "name": "@mf/mf1",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "webpack serve --port 9001",
+    "build": "webpack build --mode production",
+    "build:dev": "webpack build",
+    "test": "jest"
+  },
+  "types": "./src/exports.ts",
+  "exports": {
+    ".": "./src/exports.ts"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@mf/tsconfig": "*",
+    "@mf/webpack": "*"
+  }
+}
