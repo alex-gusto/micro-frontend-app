@@ -1,3 +1,5 @@
-import('./bootstrap');
+import "reflect-metadata";
+
+import("./bootstrap");
 
 export {};

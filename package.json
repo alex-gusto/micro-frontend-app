@@ -6,25 +6,32 @@
     "apps/*"
   ],
   "devDependencies": {
-    "@types/react-dom": "^17.0.20",
+    "@types/lodash": "^4.17.1",
     "@types/react": "^17.0.20",
+    "@types/react-dom": "^17.0.20",
+    "@types/react-router-dom": "^5.3.3",
     "@types/systemjs": "^6.13.1",
     "@types/webpack-env": "^1.16.2",
-    "@types/react-router-dom": "^5.3.3",
-    "lerna": "^5.6.2",
-    "typescript": "^4.9.5"
+    "lerna": "^8.1.2",
+    "typescript": "^4.9.5",
+    "webpack-bundle-analyzer": "^4.10.2"
   },
   "dependencies": {
     "antd": "^5.16.4",
+    "inversify": "^6.0.1",
+    "lodash": "^4.17.21",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.16.0",
-    "styled-components": "^5.3.10",
-    "single-spa": "^5.9.5"
+    "reflect-metadata": "^0.1.13",
+    "single-spa": "^5.9.5",
+    "styled-components": "^5.3.10"
   },
   "scripts": {
-    "start": "lerna run start --parallel",
-    "build": "lerna run build --parallel",
-    "build:dev": "lerna run build:dev --parallel"
+    "start": "lerna run start --parallel --stream",
+    "start:rs": "lerna run start:rs --parallel --stream",
+    "build": "lerna run build --parallel --stream",
+    "analyze": "lerna run analyze --parallel --stream",
+    "build:dev": "lerna run build:dev --parallel --stream"
   }
 }

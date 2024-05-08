@@ -1,7 +1,6 @@
 {
   "extends": "@tsconfig/create-react-app/tsconfig.json",
   "compilerOptions": {
-    "baseUrl": ".",
     "target": "es2015",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,

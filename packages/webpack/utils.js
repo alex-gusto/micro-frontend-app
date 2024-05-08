@@ -6,7 +6,7 @@ const PACKAGE_SCOPE = "@mf/";
 module.exports.parseOptions = (packageJson, env, args) => {
   const isDev = args.mode !== "production";
   const isServe = env.WEBPACK_SERVE ?? false;
-  const isAnalyze = false;
+  const isAnalyze = "analyze" in args;
   const appName = packageJson.name;
   const appAlias = appName.replace(PACKAGE_SCOPE, "");
 

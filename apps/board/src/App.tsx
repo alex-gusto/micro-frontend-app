@@ -1,9 +1,20 @@
 import type { AppConfig } from "@mf/shell";
 import { Button, Layout, Menu, MenuProps, theme } from "antd";
 import { Preview } from "./Preview";
-import { lazy, ReactElement, Suspense, useMemo, useState } from "react";
+import {
+  lazy,
+  ReactElement,
+  Suspense,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { navigateToUrl } from "single-spa";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import has from "lodash/has";
+import _ from "lodash";
+
+console.log(has({}, "foo"), _);
 
 const { Header, Sider, Content } = Layout;
 
@@ -12,7 +23,14 @@ const PreviewMF1 = lazy(() =>
 );
 
 const PreviewMF2 = lazy(() =>
-  import("@mf/mf2").then(({ Preview }) => ({ default: Preview }))
+  import("@mf/mf2").then(({ Preview, getServices }) => {
+    return {
+      default: function () {
+        const { TimelineService } = useMemo(() => getServices(), []);
+        return <Preview items={TimelineService.get()} />;
+      },
+    };
+  })
 );
 
 const previews: Record<string, ReactElement> = {
@@ -44,6 +62,10 @@ export function App({ enabledApps }: AppProps) {
       })),
     ];
   }, [enabledApps]);
+
+  useEffect(() => {
+    import("@mf/mf2").then(console.log);
+  }, []);
 
   const onSelectMenu: MenuProps["onSelect"] = (e) => {
     const params = new URLSearchParams();

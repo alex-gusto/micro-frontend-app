@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "scripts": {
     "start": "webpack serve --port 9002",
+    "start:rs": "rspack serve",
     "build": "webpack build --mode production",
+    "analyze": "webpack build --mode production --analyze",
     "build:dev": "webpack build",
     "test": "jest"
   },
@@ -14,6 +16,7 @@
   "dependencies": {},
   "devDependencies": {
     "@mf/tsconfig": "*",
-    "@mf/webpack": "*"
+    "@mf/webpack": "*",
+    "@mf/rspack": "*"
   }
 }

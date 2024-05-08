@@ -3,6 +3,10 @@ import "@mf/core/styles";
 import "./apps/apps-middleware";
 import { start } from "single-spa";
 import { enabledApps, registerApp, packageShell } from "./apps";
+import { debounce } from "lodash";
+import get from "lodash/get";
+
+// console.log(debounce(() => null), get);
 
 // Register all enabled apps
 enabledApps.forEach((app) => {
