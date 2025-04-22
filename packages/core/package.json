@@ -2,11 +2,10 @@
   "name": "@mf/core",
   "version": "1.0.0",
   "scripts": {
-    "start": "webpack serve --port 9100",
-    "start:rs": "rspack serve",
-    "build": "webpack build --mode production",
-    "analyze": "webpack build --mode production --analyze",
-    "build:dev": "webpack build",
+    "start": "rspack serve",
+    "build": "rspack build --mode production",
+    "analyze": "rspack build --mode production --analyze",
+    "build:dev": "rspack build",
     "test": "jest"
   },
   "main": "index.ts",
@@ -18,6 +17,6 @@
   "dependencies": {},
   "devDependencies": {
     "@mf/tsconfig": "*",
-    "@mf/webpack": "*"
+    "@mf/rspack": "*"
   }
 }

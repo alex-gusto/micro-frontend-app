@@ -1,8 +1,8 @@
-import { Button, Layout } from "antd";
+import { Button, Flex, Layout } from "antd";
 import { navigateToUrl } from "single-spa";
 import { App } from "./App";
 const { Header, Content } = Layout;
-import { initContext } from "@mf/core";
+import { initContext, AppVersion } from "@mf/core";
 import { servicesContainer } from "./services.provider";
 
 export default () => {
@@ -12,7 +12,10 @@ export default () => {
       <CoreProvider>
         <Layout className="h-100">
           <Header>
-            <Button onClick={() => navigateToUrl("/")}>Back to board</Button>
+            <Flex>
+              <Button onClick={() => navigateToUrl("/")}>Back to board</Button>
+              <AppVersion />
+            </Flex>
           </Header>
           <Layout>
             <Content style={{ overflow: "auto", padding: "20px" }}>

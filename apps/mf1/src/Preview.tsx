@@ -18,7 +18,7 @@ const data = [
 export const Preview = () => {
   return (
     <div>
-      <Title level={3}>Users list preview </Title>
+      <Title level={3}>Users list preview Foo 12</Title>
       <List
         dataSource={data}
         renderItem={(item, index) => (

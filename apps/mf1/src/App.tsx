@@ -13,7 +13,7 @@ const data = Array.from({ length: 10 }).map((_, i) => ({
 export const App = () => {
   return (
     <div>
-      <Title level={3}>Users list</Title>
+      <Title level={3}>Users list Foo 12</Title>
       <List
         itemLayout="vertical"
         size="large"

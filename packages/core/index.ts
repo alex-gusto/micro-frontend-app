@@ -11,3 +11,5 @@ export const initContext = (getServices: () => CoreServices) => {
 };
 
 export { useCoreServices };
+
+export * from "./AppVersion";

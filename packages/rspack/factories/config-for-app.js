@@ -20,7 +20,7 @@ module.exports.configForApp = (packageJson, env, args) => {
         exposes: options.exports,
         // Collect all app names from /apps folder including core and shell from packages.
         // Transform to remote app names: @mf/core
-        remotes: ["core", "shell", ...readAppNames()].map((name) =>
+        remotes: ["core", "shell", "sw", ...readAppNames()].map((name) =>
           getRemoteAppName(name)
         ),
       }),

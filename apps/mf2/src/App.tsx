@@ -7,6 +7,7 @@ export const App = () => {
   return (
     <div className="h-100">
       <TimesSelect />
+      Foo 12
       <Timeline items={BaseService.getAll()} />
     </div>
   );

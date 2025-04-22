@@ -1,7 +1,12 @@
 const fs = require("fs");
 const { join } = require("path");
 const paths = require("./paths");
-const { combineUrl, PACKAGE_SCOPE, readAppNames, getRemoteAppName } = require("./utils");
+const {
+  combineUrl,
+  PACKAGE_SCOPE,
+  readAppNames,
+  getRemoteAppName,
+} = require("./utils");
 const { remoteEntry } = require("./parts/module-federation.plugin");
 
 if (!process.env[`UI_URL`]) {
@@ -22,7 +27,7 @@ module.exports = ({ isServe }) => {
 
   // Collect packages urls
   const packages = Object.fromEntries(
-    ["libs", "core", ...appNames].map((name) => [
+    ["libs", "core", "sw", ...appNames].map((name) => [
       getRemoteAppName(name),
       remoteEntryURL(name),
     ])

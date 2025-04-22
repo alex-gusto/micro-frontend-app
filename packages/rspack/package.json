@@ -8,14 +8,19 @@
     "./env": "./env.js"
   },
   "dependencies": {
+    "@aaroon/workbox-rspack-plugin": "^0.3.2",
     "@module-federation/enhanced": "^0.1.11",
     "@rspack/cli": "^0.6.4",
     "@rspack/core": "^0.6.4",
     "@rspack/dev-server": "^0.6.4",
+    "crypto-browserify": "^3.12.1",
+    "css-loader": "^7.1.2",
     "dotenv": "^16.0.3",
     "dotenv-expand": "^10.0.0",
     "html-webpack-plugin": "^5.6.0",
-    "systemjs-webpack-interop": "^2.3.7"
+    "rspack-manifest-plugin": "^5.0.3",
+    "systemjs-webpack-interop": "^2.3.7",
+    "webpack-merge": "^6.0.1"
   },
   "devDependencies": {
     "@rspack/plugin-react-refresh": "^0.6.4",

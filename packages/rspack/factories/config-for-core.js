@@ -1,8 +1,8 @@
-const createBaseConfig = require('./base-config');
-const { merge } = require('webpack-merge');
-const { parseOptions } = require('../utils');
-const { moduleFederationPlugin } = require('../parts/module-federation.plugin');
-const { loadExternals } = require('../parts/externals');
+const createBaseConfig = require("./base-config");
+const { merge } = require("webpack-merge");
+const { moduleFederationPlugin } = require("../parts/module-federation.plugin");
+const { loadExternals } = require("../parts/externals");
+const { parseOptions, getRemoteAppName } = require("../utils");
 
 module.exports.configForCore = (packageJson, ...args) => {
   const options = parseOptions(packageJson, ...args);
@@ -10,13 +10,14 @@ module.exports.configForCore = (packageJson, ...args) => {
 
   return merge(baseConfig, {
     entry: {
-      [options.appName]: 'systemjs-webpack-interop/auto-public-path',
+      [options.appName]: "systemjs-webpack-interop/auto-public-path",
     },
 
     plugins: [
       moduleFederationPlugin({
         name: options.appName,
         exposes: options.exports,
+        remotes: ["sw"].map((name) => getRemoteAppName(name)),
       }),
     ],
 

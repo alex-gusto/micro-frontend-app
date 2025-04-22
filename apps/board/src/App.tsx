@@ -1,20 +1,11 @@
 import type { AppConfig } from "@mf/shell";
 import { Button, Layout, Menu, MenuProps, theme } from "antd";
 import { Preview } from "./Preview";
-import {
-  lazy,
-  ReactElement,
-  Suspense,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { lazy, ReactElement, Suspense, useMemo } from "react";
 import { navigateToUrl } from "single-spa";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import has from "lodash/has";
 import _ from "lodash";
-
-console.log(has({}, "foo"), _);
+import { AppVersion } from "@mf/core";
 
 const { Header, Sider, Content } = Layout;
 
@@ -63,10 +54,6 @@ export function App({ enabledApps }: AppProps) {
     ];
   }, [enabledApps]);
 
-  useEffect(() => {
-    import("@mf/mf2").then(console.log);
-  }, []);
-
   const onSelectMenu: MenuProps["onSelect"] = (e) => {
     const params = new URLSearchParams();
     if (e.key !== "/") {
@@ -84,7 +71,9 @@ export function App({ enabledApps }: AppProps) {
     return (
       <>
         {preview !== "/" ? (
-          <Button onClick={() => navigateToUrl(preview)}>Go to app</Button>
+          <Button onClick={() => navigateToUrl(preview)}>
+            Go to app Foo 12
+          </Button>
         ) : null}
         <Suspense fallback={"Loading"}>{previews[preview]}</Suspense>
       </>
@@ -104,7 +93,9 @@ export function App({ enabledApps }: AppProps) {
         />
       </Sider>
       <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer }}></Header>
+        <Header style={{ padding: 0, background: colorBgContainer }}>
+          <AppVersion />
+        </Header>
         <Content
           style={{
             margin: "24px 16px",
