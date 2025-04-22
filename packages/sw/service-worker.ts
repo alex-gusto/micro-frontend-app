@@ -86,8 +86,6 @@ const bc = new BroadcastChannel("sw-updates");
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     PcController.activate(event).then(async () => {
-      const existingClients = await self.clients.matchAll({ type: "window" });
-
       // Force new service worker to controle all tabs
       await self.clients.claim();
       bc.postMessage({ type: "NEW_SW_ACTIVE" });
