@@ -1,6 +1,6 @@
 import type { PrecacheEntry } from "workbox-precaching";
 
-const CACHE_PREFIX = "iqx-manifests:";
+const CACHE_PREFIX = "mf-manifests:";
 // TODO: collect enabled apps from shell config
 const apps = ["libs", "shell", "core", "board", "mf1", "mf2"];
 

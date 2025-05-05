@@ -1,8 +1,8 @@
 import type { CleanupResult, InstallResult } from "workbox-precaching";
 import { initWorker } from "./worker/init-worker";
 
-const VERSION = process.env.APP_VERSION!;
-let logEnabled = true;
+const VERSION = process.env.APP_VERSION;
+let logEnabled = false;
 
 const log = (...args: unknown[]) =>
   logEnabled &&

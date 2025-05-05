@@ -29,8 +29,10 @@ function assertPcController(
 }
 
 export const initWorker = (
-  version: string
+  version: string | undefined
 ): WorkerManager | Promise<WorkerManager> => {
+  if (!version) throw new Error("App version is required");
+
   if (router && pcController) {
     return createWorker(version, router, pcController);
   }
