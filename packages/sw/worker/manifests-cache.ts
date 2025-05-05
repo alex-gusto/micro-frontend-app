@@ -1,8 +1,11 @@
 import type { PrecacheEntry } from "workbox-precaching";
 
 const CACHE_PREFIX = "mf-manifests:";
-// TODO: collect enabled apps from shell config
-const apps = ["libs", "shell", "core", "board", "mf1", "mf2"];
+
+const url = new URL(self.location.href);
+const appsParam = url.searchParams.get("apps");
+
+const apps = appsParam?.split(",") || [];
 
 function getCacheName(ver: string) {
   return `${CACHE_PREFIX}${ver}`;

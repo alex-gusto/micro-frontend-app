@@ -9,8 +9,10 @@ notification.config({
   duration: 3,
 });
 
-export const initSW = () => {
-  const wb = new Workbox(`/service-worker.js`, { scope: "/" });
+export const initSW = (apps: string[]) => {
+  const wb = new Workbox(`/service-worker.js?apps=${apps.join(",")}`, {
+    scope: "/",
+  });
 
   wb.addEventListener("waiting", (event) => {
     if (event.isExternal) return;

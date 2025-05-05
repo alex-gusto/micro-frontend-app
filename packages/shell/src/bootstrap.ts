@@ -25,4 +25,12 @@ registerApp(
 
 start();
 
-initSW();
+initSW([
+  "core",
+  "libs",
+  "board",
+  "shell",
+  ...enabledApps
+    .filter((app) => app.enabled)
+    .map((app) => app.path.replace("/", "")),
+]);
