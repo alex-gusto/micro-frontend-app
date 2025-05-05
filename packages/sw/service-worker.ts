@@ -1,100 +1,94 @@
-import {
-  PrecacheController,
-  PrecacheRoute,
-  type PrecacheEntry,
-} from "workbox-precaching";
-import { RegExpRoute, Router } from "workbox-routing";
-import { CacheFirst } from "workbox-strategies";
-import { CacheableResponsePlugin } from "workbox-cacheable-response";
+import type { CleanupResult, InstallResult } from "workbox-precaching";
+import { initWorker } from "./init-worker";
 
-const router = new Router();
-router.addFetchListener();
-const PcController = new PrecacheController();
+const VERSION = process.env.APP_VERSION!;
+let logEnabled = true;
+
+const log = (...args: unknown[]) =>
+  logEnabled &&
+  console.log(
+    "SW: %c" + VERSION,
+    "padding: 0px 2px; border-radius: 2px; background: tomato;",
+    ...args
+  );
 
 declare const self: ServiceWorkerGlobalScope;
 
-const generatedManifest = self.__WB_MANIFEST;
-
-// TODO: collect enabled apps from shell config
-const apps = ["board", "mf1", "core", "mf2", "shell", "libs"];
-
-const fetchAppManifests = async () => {
-  const manifests = await Promise.allSettled(
-    apps
-      .map((app) => fetch(`/${app}/manifest.json`))
-      .map((req) => req.then((r) => r.json()))
-  );
-
-  return manifests
-    .filter(
-      (result): result is PromiseFulfilledResult<PrecacheEntry[]> =>
-        result.status === "fulfilled"
-    )
-    .map((r) => r.value)
-    .flat();
-};
-
-const init = () =>
-  fetchAppManifests().then((manifests) => {
-    // This method will add entries to the precache list
-    PcController.addToCacheList([...generatedManifest, ...manifests]);
-
-    // add a route to build files
-    router.registerRoute(new PrecacheRoute(PcController));
-
-    const THIRD_PART_CACHE = "third-party";
-
-    // cache cdn js files
-    const routesToCache = [
-      new RegExpRoute(
-        new RegExp("^https://cdnjs.cloudflare.com"),
-        new CacheFirst({
-          cacheName: THIRD_PART_CACHE,
-          plugins: [
-            new CacheableResponsePlugin({
-              statuses: [0, 200],
-            }),
-          ],
-        })
-      ),
-      new RegExpRoute(
-        new RegExp("^https://fonts.googleapis.com"),
-        new CacheFirst({
-          cacheName: THIRD_PART_CACHE,
-          plugins: [
-            new CacheableResponsePlugin({
-              statuses: [0, 200],
-            }),
-          ],
-        })
-      ),
-    ];
-
-    routesToCache.forEach((route) => {
-      router.registerRoute(route);
-    });
-  });
+const getWorker = () => initWorker(VERSION);
 
 // Install service worker: fetch manifests and pre-cache
 self.addEventListener("install", (event) => {
-  event.waitUntil(init().then(() => PcController.install(event)));
+  const onSuccess = (result: InstallResult) => {
+    log("Install: ", result);
+  };
+
+  const workerOrPromise = getWorker();
+
+  event.waitUntil(
+    Promise.resolve(workerOrPromise)
+      .then((worker) => worker.install(event))
+      .then(onSuccess)
+  );
 });
 
 const bc = new BroadcastChannel("sw-updates");
 
 // Activate service worker
 self.addEventListener("activate", (event) => {
-  event.waitUntil(
-    PcController.activate(event).then(async () => {
-      // Force new service worker to controle all tabs
-      await self.clients.claim();
+  const workerOrPromise = getWorker();
+
+  const onSuccess = async (cleanup: CleanupResult) => {
+    log("Cleanup result: ", cleanup);
+
+    const existingClients = await self.clients.matchAll({ type: "window" });
+
+    // Force new service worker to controle all tabs
+    await self.clients.claim();
+
+    if (existingClients.length > 0) {
       bc.postMessage({ type: "NEW_SW_ACTIVE" });
-    })
+    }
+  };
+
+  event.waitUntil(
+    Promise.resolve(workerOrPromise)
+      .then((worker) => worker.activate(event))
+      .then(onSuccess)
   );
 });
 
-addEventListener("message", (event) => {
-  if (event.data?.type === "SKIP_WAITING") {
-    return self.skipWaiting();
+self.addEventListener("message", (event) => {
+  switch (event.data.type) {
+    case "SKIP_WAITING": {
+      self.skipWaiting();
+      break;
+    }
+
+    case "ENABLE_LOGS": {
+      logEnabled = event.data.payload;
+    }
+  }
+
+  log("Message: ", event);
+});
+
+self.addEventListener("fetch", (event) => {
+  const { request } = event;
+  const workerOrPromise = getWorker();
+
+  if (workerOrPromise instanceof Promise) {
+    event.respondWith(
+      workerOrPromise.then((worker) => {
+        const responsePromise = worker.handleRequest({ request, event });
+        if (responsePromise) return responsePromise;
+
+        return fetch(request);
+      })
+    );
+  } else {
+    const responsePromise = workerOrPromise.handleRequest({ request, event });
+    if (responsePromise) {
+      event.respondWith(responsePromise);
+    }
   }
 });
