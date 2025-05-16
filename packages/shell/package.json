@@ -5,7 +5,8 @@
     "start": "rspack serve",
     "build": "rspack build --mode production",
     "analyze": "rspack build --mode production --analyze",
-    "build:dev": "webpack build"
+    "build:dev": "rspack build",
+    "check-types": "tsc --noEmit"
   },
   "main": "./src/exports.ts",
   "types": "./src/exports.ts",

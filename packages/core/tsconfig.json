@@ -1,15 +1,10 @@
 {
   "extends": "@mf/tsconfig/base.json",
   "compilerOptions": {
+    "rootDir": ".",
     "paths": {
-      "core/*": [
-        "./*"
-      ]
+      "core/*": ["./*"]
     }
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.json",
-  ]
+  "include": ["**/*.ts", "**/*.tsx", "**/*.json"]
 }

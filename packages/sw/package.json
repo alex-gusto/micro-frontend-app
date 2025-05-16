@@ -6,7 +6,8 @@
     "start": "rspack serve",
     "build": "rspack build --mode production",
     "analyze": "rspack build --mode production --analyze",
-    "build:dev": "rspack build"
+    "build:dev": "rspack build",
+    "check-types": "tsc --noEmit"
   },
   "main": "index.ts",
   "types": "index.ts",

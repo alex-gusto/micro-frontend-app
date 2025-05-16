@@ -28,6 +28,8 @@
   "scripts": {
     "start": "lerna run start --parallel --stream",
     "build": "lerna run build --parallel --stream",
+    "check-types": "lerna run check-types --parallel",
+    "build:ts-check": "npm run check-types && npm run build",
     "analyze": "lerna run analyze --parallel --stream",
     "build:dev": "lerna run build:dev --parallel --stream"
   }
