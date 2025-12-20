@@ -10,6 +10,7 @@ module.exports.parseOptions = (packageJson, env, args) => {
   const appName = packageJson.name;
   const appAlias = appName.replace(PACKAGE_SCOPE, "");
   const port = env.CUSTOM_PORT ?? "auto";
+  const withSandbox = env.WITH_SANDBOX ?? false;
 
   return {
     isDev,
@@ -18,6 +19,7 @@ module.exports.parseOptions = (packageJson, env, args) => {
     appName,
     appAlias,
     exports: packageJson.exports,
+    withSandbox,
     port,
     publicPath: isServe ? "/" : `/${appAlias}/`,
   };
