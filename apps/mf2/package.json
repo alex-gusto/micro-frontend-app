@@ -13,7 +13,9 @@
   "exports": {
     ".": "./src/exports.ts"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@mf/rspack": "*"
+  },
   "devDependencies": {
     "@mf/tsconfig": "*",
     "@mf/rspack": "*"

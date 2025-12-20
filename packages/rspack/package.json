@@ -5,7 +5,11 @@
   "exports": {
     ".": "./index.js",
     "./paths": "./paths.js",
-    "./env": "./env.js"
+    "./env": "./env.js",
+    "./get-worker-url": {
+      "types": "./get-worker-url.d.ts",
+      "default": "./get-worker-url.js"
+    }
   },
   "dependencies": {
     "@aaroon/workbox-rspack-plugin": "^0.3.2",

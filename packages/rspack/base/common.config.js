@@ -8,6 +8,7 @@ module.exports = (options) => {
   const plugins = [
     new DefinePlugin({
       "process.env.PUBLIC_URL": JSON.stringify(options.publicPath),
+      "process.env.WORKER_URL": JSON.stringify(options.workerUrl),
     }),
     new DefinePlugin(getClientEnvironment()),
   ];

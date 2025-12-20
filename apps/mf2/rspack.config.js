@@ -1,8 +1,13 @@
 /* eslint-disable */
-const { configForApp } = require("@mf/rspack");
+const { configForApp, configForWW } = require("@mf/rspack");
 const packageJson = require("./package.json");
 
 module.exports = (env, args) => {
   env.CUSTOM_PORT = 9002;
-  return configForApp(packageJson, env, args);
+  env.WITH_SANDBOX = true;
+
+  return [
+    configForApp(packageJson, env, args),
+    configForWW(packageJson, env, args),
+  ];
 };

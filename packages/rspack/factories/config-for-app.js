@@ -29,7 +29,7 @@ module.exports.configForApp = (packageJson, env, args) => {
   ];
 
   // Sandbox for app
-  if (options.withSandbox) {
+  if (options.withSandbox && options.isServe) {
     plugins.push(
       new HtmlWebpackPlugin({
         inject: false,

@@ -1,4 +1,4 @@
-import { heavyLogic } from "./domain/heavy-logic";
+import { heavyLogic } from "../domain";
 
 type FudgeRequest = {
   type: "fudge";

@@ -1,5 +1,6 @@
 import { useCoreServices } from "@mf/core";
 import { Timeline, Button, Flex } from "antd";
+import { initWorker } from "./workers";
 import { heavyLogic } from "./domain";
 import { TimesSelect } from "./TimesSelect";
 
@@ -7,17 +8,14 @@ export const App = () => {
   const { BaseService } = useCoreServices();
 
   const onWorker = async () => {
-    const worker = new Worker("/workers/mf2.worker.js", { type: "module" });
-
-    const data = await new Promise((resolve) => {
+    const data = await new Promise(async (resolve) => {
+      const worker = await initWorker();
       worker.addEventListener("message", (event) => {
         resolve(event.data);
       });
 
       worker.postMessage({ type: "fudge", payload: 1000 });
     });
-
-    console.log("🚀 ~ onRun ~ worker:", data);
   };
 
   const onRun = () => {

@@ -12,6 +12,9 @@ module.exports.parseOptions = (packageJson, env, args) => {
   const port = env.CUSTOM_PORT ?? "auto";
   const withSandbox = env.WITH_SANDBOX ?? false;
 
+  // TODO: hardcoded localhost for development
+  const workerUrl = isServe ? `http://localhost:${port}/` : `/${appAlias}/`;
+
   return {
     isDev,
     isServe,
@@ -22,6 +25,7 @@ module.exports.parseOptions = (packageJson, env, args) => {
     withSandbox,
     port,
     publicPath: isServe ? "/" : `/${appAlias}/`,
+    workerUrl,
   };
 };
 

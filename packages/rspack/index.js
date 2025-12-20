@@ -4,6 +4,7 @@ const { configForCore } = require("./factories/config-for-core");
 const { configForShell } = require("./factories/config-for-shell");
 const { configForLibs } = require("./factories/config-for-libs");
 const { configForSW } = require("./factories/config-for-sw");
+const { configForWW } = require("./factories/config-for-ww");
 
 module.exports = {
   configForApp,
@@ -11,4 +12,5 @@ module.exports = {
   configForShell,
   configForLibs,
   configForSW,
+  configForWW,
 };
