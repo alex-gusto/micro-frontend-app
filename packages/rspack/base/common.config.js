@@ -38,6 +38,7 @@ module.exports = (options) => {
     plugins,
 
     experiments: {
+      css: true,
       topLevelAwait: true,
       rspackFuture: {
         disableTransformByDefault: true,
